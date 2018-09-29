@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    ViewBag.PageDescription = "Error Status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="callout callout-info">
+    <h4>Error!</h4>
+    <p>
+        @TempData["error"]
+    </p>
+</div>
+

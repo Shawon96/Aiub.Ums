@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Aiub.Ums.Web.Mvc.Models.CourseSectionsStudentsVM>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.PageDescription = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <b>@Html.DisplayFor(modelItem => item.Course.Name)</b>
+            <span class="label label-default">Credits: @Html.DisplayFor(modelItem => item.Course.Credit)</span>
+            <span class="label label-default">Total Sections: @Html.DisplayFor(modelItem => item.Sections.Count)</span>
+        </div>
+        <div class="box-body">
+            @foreach (var sec in item.Sections)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a class="btn" href="/Registration/AddStudentToSection?SectionId=@sec.Section.Id"><b>Section: @sec.Section.Name</b></a>
+                        <span class="badge">@Html.DisplayFor(modelItem => sec.Students.Count)</span>
+                        @Html.ActionLink("Add Student", "AddStudentToSection", new {SectionId=sec.Section.Id}, new {@class = "btn btn-success pull-right"})
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-footer">
+                        @foreach (var std in sec.Students)
+                        {
+                            <div class="pad">
+                                <a href="/Registration/Delete/@std.Id/@sec.Section.Id"><i class="fa fa-remove"></i></a> @std.Name
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@section UmsScripts{ }
